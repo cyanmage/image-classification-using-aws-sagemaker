@@ -8,6 +8,12 @@ import torchvision
 import torchvision.models as models
 import torchvision.transforms as transforms
 
+import logging, os, sys
+
+logger=logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 import argparse
 
 def test(model, test_loader):
@@ -22,7 +28,7 @@ def test(model, test_loader):
     
     for inputs, labels in test_loader:
         outputs=model(inputs)
-        #loss=criterion(outputs, labels)
+        loss=criterion(outputs, labels)
         _, preds = torch.max(outputs, 1)
         running_loss += loss.item() * inputs.size(0)
         running_corrects += torch.sum(preds == labels.data)
@@ -32,17 +38,21 @@ def test(model, test_loader):
     
     logger.info(f"Testing Loss: {total_loss}")
     logger.info(f"Testing Accuracy: {total_acc}")
-
-def train(model, train_loader, criterion, optimizer):
+    
+def train(model, train_loader, validation_loader, criterion, optimizer):
     '''
     TODO: Complete this function that can take a model and
           data loaders for training and will get train the model
           Remember to include any debugging/profiling hooks that you might need
     '''
-    epochs=5
+    epochs=1
     best_loss=1e6
     image_dataset={'train':train_loader, 'valid':validation_loader}
     loss_counter=0
+    
+    idx_sample = 0
+    nb_samples = len(image_dataset['train'])
+    print(nb_samples)
     
     for epoch in range(epochs):
         logger.info(f"Epoch: {epoch}")
@@ -55,6 +65,8 @@ def train(model, train_loader, criterion, optimizer):
             running_corrects = 0
 
             for inputs, labels in image_dataset[phase]:
+                idx_sample += 1
+                
                 outputs = model(inputs)
                 loss = criterion(outputs, labels)
 
@@ -81,6 +93,10 @@ def train(model, train_loader, criterion, optimizer):
                                                                                  epoch_loss,
                                                                                  epoch_acc,
                                                                                  best_loss))
+            if (idx_sample/nb_samples<0.05):
+                print("échantillon terminé")
+                break
+            
         if loss_counter==1:
             break
         if epoch==0:
@@ -143,14 +159,14 @@ def main(args):
     '''
     TODO: Create your loss and optimizer
     '''
-    loss_criterion = nn.CrossEntropyLoss()
+    criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.fc.parameters(), lr=args.learning_rate)
     
     '''
     TODO: Call the train function to start training your model
     Remember that you will need to set up a way to get training data from S3
     '''
-    train_loader, test_loader, validation_loader=create_data_loaders(args.data, args.batch_size)   
+    train_loader, test_loader, validation_loader=create_data_loaders(args.data, args.batch_size)  
     model=train(model, train_loader, validation_loader, criterion, optimizer)
     
     '''
@@ -161,7 +177,7 @@ def main(args):
     '''
     TODO: Save the trained model
     '''
-    torch.save(model, path)
+    torch.save(model.cpu().state_dict(), os.path.join(args.model_dir, "model.pth"))
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
@@ -170,9 +186,10 @@ if __name__=='__main__':
     '''
     parser.add_argument('--learning_rate', type=float)
     parser.add_argument('--batch_size', type=int)
-    #parser.add_argument('--data', type=str, default=os.environ['SM_CHANNEL_TRAINING'])
-    #parser.add_argument('--model_dir', type=str, default=os.environ['SM_MODEL_DIR'])
-    #parser.add_argument('--output_dir', type=str, default=os.environ['SM_OUTPUT_DATA_DIR'])    
+    
+    parser.add_argument('--data', type=str, default=os.environ['SM_CHANNEL_TRAINING'])
+    parser.add_argument('--model_dir', type=str, default=os.environ['SM_MODEL_DIR'])
+    parser.add_argument('--output_dir', type=str, default=os.environ['SM_OUTPUT_DATA_DIR'])    
     
     args=parser.parse_args()
     
