@@ -42,7 +42,7 @@ def test(model, test_loader, criterion, hook, device):
     running_corrects=0
     
     for inputs, labels in test_loader:
-        inputs, labels = inputs.to(device), labels.to(device)
+        #inputs, labels = inputs.to(device), labels.to(device)
         outputs=model(inputs)
         loss=criterion(outputs, labels)
         _, preds = torch.max(outputs, 1)
@@ -84,7 +84,7 @@ def train(model, train_loader, validation_loader, criterion, optimizer, hook, de
 
             for inputs, labels in image_dataset[phase]:
                 
-                inputs, labels = inputs.to(device), labels.to(device)
+                #inputs, labels = inputs.to(device), labels.to(device)
                 outputs = model(inputs)
                 loss = criterion(outputs, labels)
 
@@ -170,8 +170,13 @@ def main(args):
     TODO: Initialize a model by calling the net function
     '''
     model=net()
-    device = "cuda:0" if torch.cuda.is_available() else "cpu"
-    net.to(device)
+    
+#    if torch.cuda.is_available():
+#        device = torch.device("cuda")
+#    else: 
+#        device = torch.device("cpu")
+#    net.to(device)
+    device=None
 
     ### Hook for debugging and profiling
     hook = smd.Hook.create_from_json_file()
