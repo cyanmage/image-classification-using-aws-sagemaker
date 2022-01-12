@@ -42,7 +42,8 @@ def test(model, test_loader, criterion, hook, device):
     running_corrects=0
     
     for inputs, labels in test_loader:
-        #inputs, labels = inputs.to(device), labels.to(device)
+        if device:
+            inputs, labels = inputs.to(device), labels.to(device)
         outputs=model(inputs)
         loss=criterion(outputs, labels)
         _, preds = torch.max(outputs, 1)
@@ -83,8 +84,8 @@ def train(model, train_loader, validation_loader, criterion, optimizer, hook, de
             running_corrects = 0
 
             for inputs, labels in image_dataset[phase]:
-                
-                #inputs, labels = inputs.to(device), labels.to(device)
+                if device:
+                    inputs, labels = inputs.to(device), labels.to(device)
                 outputs = model(inputs)
                 loss = criterion(outputs, labels)
 
