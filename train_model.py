@@ -20,17 +20,29 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 import argparse
 
-def test(model, test_loader, criterion):
+#DEBUGGER IMPORTS
+import smdebug.pytorch as smd
+
+#PROFILER IMPORTS
+#from smdebug import modes
+#from smdebug.profiler.utils import str2bool
+#from smdebug.pytorch import get_hook #--> NOT USED, hook passed in argument
+
+
+def test(model, test_loader, criterion, hook, device):
     '''
     TODO: Complete this function that can take a model and a 
           testing data loader and will get the test accuray/loss of the model
           Remember to include any debugging/profiling hooks that you might need
     '''
+    hook.set_mode(smd.modes.EVAL)
+    
     model.eval()
     running_loss=0
     running_corrects=0
     
     for inputs, labels in test_loader:
+        inputs, labels = inputs.to(device), labels.to(device)
         outputs=model(inputs)
         loss=criterion(outputs, labels)
         _, preds = torch.max(outputs, 1)
@@ -43,34 +55,36 @@ def test(model, test_loader, criterion):
     logger.info(f"Testing Loss: {total_loss}")
     logger.info(f"Testing Accuracy: {total_acc}")
     
-def train(model, train_loader, validation_loader, criterion, optimizer):
+def train(model, train_loader, validation_loader, criterion, optimizer, hook, device):
     '''
     TODO: Complete this function that can take a model and
           data loaders for training and will get train the model
           Remember to include any debugging/profiling hooks that you might need
     '''
+    
+    
     epochs=1
     best_loss=1e6
     image_dataset={'train':train_loader, 'valid':validation_loader}
     loss_counter=0
     
-    idx_sample = 0
-    nb_samples = len(image_dataset['train'])
-    print(nb_samples)
+    hook.register_loss(criterion)
     
     for epoch in range(epochs):
         logger.info(f"Epoch: {epoch}")
         for phase in ['train', 'valid']:
             if phase=='train':
                 model.train()
+                hook.set_mode(smd.modes.TRAIN)
             else:
                 model.eval()
+                hook.set_mode(smd.modes.EVAL)                
             running_loss = 0.0
             running_corrects = 0
 
             for inputs, labels in image_dataset[phase]:
-                idx_sample += 1
                 
+                inputs, labels = inputs.to(device), labels.to(device)
                 outputs = model(inputs)
                 loss = criterion(outputs, labels)
 
@@ -97,9 +111,6 @@ def train(model, train_loader, validation_loader, criterion, optimizer):
                                                                                  epoch_loss,
                                                                                  epoch_acc,
                                                                                  best_loss))
-            if (idx_sample/nb_samples<0.05):
-                print("échantillon terminé")
-                break
             
         if loss_counter==1:
             break
@@ -159,24 +170,33 @@ def main(args):
     TODO: Initialize a model by calling the net function
     '''
     model=net()
+    device = "cuda:0" if torch.cuda.is_available() else "cpu"
+    net.to(device)
+
+    ### Hook for debugging and profiling
+    hook = smd.Hook.create_from_json_file()
+    hook.register_hook(model)
     
     '''
     TODO: Create your loss and optimizer
     '''
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.fc.parameters(), lr=args.learning_rate)
+
+    
+
     
     '''
     TODO: Call the train function to start training your model
     Remember that you will need to set up a way to get training data from S3
     '''
     train_loader, test_loader, validation_loader=create_data_loaders(args.data, args.batch_size)  
-    model=train(model, train_loader, validation_loader, criterion, optimizer)
+    model=train(model, train_loader, validation_loader, criterion, optimizer, hook, device)
     
     '''
     TODO: Test the model to see its accuracy
     '''
-    test(model, test_loader, criterion)
+    test(model, test_loader, criterion, hook, device)
     
     '''
     TODO: Save the trained model

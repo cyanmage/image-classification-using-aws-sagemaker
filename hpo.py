@@ -54,10 +54,6 @@ def train(model, train_loader, validation_loader, criterion, optimizer):
     image_dataset={'train':train_loader, 'valid':validation_loader}
     loss_counter=0
     
-    idx_sample = 0
-    nb_samples = len(image_dataset['train'])
-    print(nb_samples)
-    
     for epoch in range(epochs):
         logger.info(f"Epoch: {epoch}")
         for phase in ['train', 'valid']:
@@ -69,7 +65,6 @@ def train(model, train_loader, validation_loader, criterion, optimizer):
             running_corrects = 0
 
             for inputs, labels in image_dataset[phase]:
-                idx_sample += 1
                 
                 outputs = model(inputs)
                 loss = criterion(outputs, labels)
@@ -97,9 +92,6 @@ def train(model, train_loader, validation_loader, criterion, optimizer):
                                                                                  epoch_loss,
                                                                                  epoch_acc,
                                                                                  best_loss))
-            if (idx_sample/nb_samples<0.05):
-                print("échantillon terminé")
-                break
             
         if loss_counter==1:
             break
