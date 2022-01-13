@@ -66,7 +66,7 @@ loss_not_decreasing(), vanishing_gradient(), exploding_tensor(), overfit(), clas
 LowGPUUtilization(), OverallSystemUsage(), CPUBottleneck()
 
 #### Artifact folders created after debugging and profiling jobs
-![](img/DEBUGGING_TRAINING/Artifacts_created_after_training_with _debugger_and _profiling.jpg)
+![](img/DEBUGGING_TRAINING/Artifacts_folders.jpg)
 
 
 
