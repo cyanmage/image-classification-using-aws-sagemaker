@@ -25,7 +25,7 @@ It is a categorical parameter which values are chosen amongst three : 32, 64 or 
 - The _learning_rate_ for the optimizer ("adam" in this tuning)    
 It is a continuous parameter whose values are between 0.001 and 0.01
 
-These hyperparameter ranges were passed in an HyperparameterTuner instance.
+These hyperparameter ranges were passed in an HyperparameterTuner instance class.
 
 
 #### 1) Screenshot of completed hyperparameter tuning jobs:
