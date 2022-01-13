@@ -80,9 +80,9 @@ Here is the repartition of the different rules tested.
 
 ![](img/DEBUGGING_TRAINING/Rules_and_results.png)
 
-"GPU" has not been used, so LowGPUUtilization is not relevant. 
+"GPU" has not been used, so LowGPUUtilization is not relevant.  
 What would be interesting to investigate are the "explodingTensor" and "Overfit" errors. It seems that coefficients of tensors are getting bigger and bigger. 
-Moreover, with overfitting, the model adapt to training data, but not so well for validation data...
+Moreover, with overfitting, the model adapt to training data, but not so well for validation data...   
 And some issues are found for initialization of weights and maybe for CPU bottlenecks.
 
 #### Report
