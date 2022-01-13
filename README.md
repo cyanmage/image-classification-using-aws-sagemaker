@@ -88,7 +88,7 @@ Moreover, with overfitting, the model adapt to training data, but not so well fo
 #### HTML Report
 - In the "System usage statistics", it is said : "The 95th percentile of the total CPU utilization is only 60%". So most of the time, the CPU seems to be underutilized (even if it seems there are some CPU bottlenecks). So a smaller instance shoud be recommanded (I used a "ml.p3.2xlarge" one)
 
-- In the "Overview: CPU operators" subpart, it is interesting to see that different tasks of convolutional layers are equally reparted, so there isn't a bottleneck at a specific layer.
+- In the "Overview: CPU operators" subpart, it is interesting to see that different tasks of convolutional layers are equally reparted, so there is no bottleneck at a specific layer.
 
 - Recommandations are given but they may contradict other choices (batch size should be augmented, but it was a choice of hyperparameter tuning process).
 
