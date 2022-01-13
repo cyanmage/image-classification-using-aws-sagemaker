@@ -80,21 +80,21 @@ Here is the repartition of the different rules tested.
 
 ![](img/DEBUGGING_TRAINING/Rules_and_results.png)
 
-"GPU" has not been used, so LowGPUUtilization is not relevant.  
-What would be interesting to investigate are the "explodingTensor" and "Overfit" errors. It seems that coefficients of tensors are getting bigger and bigger. 
+- "GPU" has not been used, so LowGPUUtilization is not relevant.  
+- What would be interesting to investigate are the "explodingTensor" and "Overfit" errors. It seems that coefficients of tensors are getting bigger and bigger. 
 Moreover, with overfitting, the model adapt to training data, but not so well for validation data...   
-And some issues are found for initialization of weights and maybe for CPU bottlenecks.
+- And some issues are found for initialization of weights and maybe for CPU bottlenecks.
 
-#### Report
-In the "System usage statistics", it is said : "The 95th percentile of the total CPU utilization is only 60%". So most of the time, the CPU seems to be underutilized (even if it seems there are some CPU bottlenecks). So a smaller instance shoud be recommanded (I used a "ml.p3.2xlarge" one)
+#### HTML Report
+- In the "System usage statistics", it is said : "The 95th percentile of the total CPU utilization is only 60%". So most of the time, the CPU seems to be underutilized (even if it seems there are some CPU bottlenecks). So a smaller instance shoud be recommanded (I used a "ml.p3.2xlarge" one)
 
-In the "Overview: CPU operators" subpart, it is interesting to see that different tasks of convolutional layers are equally reparted, so there isn't a bottleneck at a specific layer.
+- In the "Overview: CPU operators" subpart, it is interesting to see that different tasks of convolutional layers are equally reparted, so there isn't a bottleneck at a specific layer.
 
-Recommandations are given but they may contradict other choices (batch size should be augmented, but it was a choice of hyperparameter tuning process).
+- Recommandations are given but they may contradict other choices (batch size should be augmented, but it was a choice of hyperparameter tuning process).
 
-In the "Dataloading analysis", it is said "Your training instance provided 8 CPU cores, however your training job only ran on average 1 dataloader workers in parallel". So if I would have to reload a job on this instance, I would augment the number of dataworkers in parallel to take maximum profit of the throughput.
+- In the "Dataloading analysis", it is said "Your training instance provided 8 CPU cores, however your training job only ran on average 1 dataloader workers in parallel". So if I would have to reload a job on this instance, I would augment the number of dataworkers in parallel to take maximum profit of the throughput.
 
-For the "CPU bottlenecks", the rule is to compare CPU and GPU usages. As GPU was not used, it considers CPU is overused, and that a part of the job should have been dedicated to GPU.
+- For the "CPU bottlenecks", the rule is to compare CPU and GPU usages. As GPU was not used, it considers CPU is overused, and that a part of the job should have been dedicated to GPU.
 
 
 ## Model Deployment
