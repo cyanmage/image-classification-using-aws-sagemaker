@@ -39,7 +39,6 @@ These hyperparameter ranges were passed in an HyperparameterTuner instance class
 #### 3) Metrics of hyperparameter tuning jobs (What is logged internally in the program and that the hook exploits):
 ![](img/HYPERPARAMETER_TUNING/Metrics_of_hyperparameter_tuning_jobs.jpg)
 
-Some metrics may be useful during the training
 #### 4) Cloudwatch metrics during the training process (what AWS sees externally):
 ![](img/HYPERPARAMETER_TUNING/metric_cpu_utilization.jpg)
 
@@ -58,8 +57,8 @@ Some metrics may be useful during the training
     hook.register_hook(model)
 - I passed it as argument in the train and test functions
 - In the train function:   
- I set the "TRAIN" mode during training -hook.set_mode(smd.modes.TRAIN) 
- and "EVAL" during validation -hook.set_mode(smd.modes.EVAL)-
+ I set the "TRAIN" mode during training -hook.set_mode(smd.modes.TRAIN)  
+ and "EVAL" during validation -hook.set_mode(smd.modes.EVAL)
 - In the test function, it was naturally set to EVAL mode.
 
 The configs for profiler and debugger are prepared in the following dictionaries : profiler_config and debugger_config, and then passed to profiler_config and 
