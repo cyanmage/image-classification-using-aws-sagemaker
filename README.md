@@ -109,10 +109,11 @@ _Remark : I had to get an entry point with a python file I recovered from the Co
 
 Then it was deployed and I got the endpoint_name (attribute), and created an instance of a Predictor class with this name.
 
-I adapted the input format of the endpoint (predictor.serializer = IdentitySerializer("image/png")), to take into account images.
-And then I launched a prediction with an image in "local" instance. Unfortunately, I got the following error : "An error occurred (InternalFailure) when calling the InvokeEndpoint operation (reached max retries: 4)". I will investigate furthermore if there is still time.
+I adapted the input format of the endpoint (predictor.serializer = IdentitySerializer("image/png")), to take into account images.   
+And then I launched a prediction with an image in "local" instance.   
+Unfortunately, I got the following error : "An error occurred (InternalFailure) when calling the InvokeEndpoint operation (reached max retries: 4)". I will investigate furthermore if there is still time.
 
-Here is a screenshot of a deployed active endpoint :
+Here is a screenshot of a deployed active endpoint :   
 ![](img/ENDPOINT/endpoint_screenshot_in_sagemaker.png)
 
 
