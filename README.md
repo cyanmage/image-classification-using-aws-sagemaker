@@ -19,12 +19,10 @@ Upload the data to an S3 bucket through the AWS Gateway so that SageMaker has ac
 The model is adapted from a resnet50 pretrained model. It is based on convolutional layers adapted for ML vision. So I took profit of transfer learning and already pretuned parameters. Dense layers were added on top to perform classification (my needs).
 
 For hyperparameters, I tuned the two following ones : 
-- The batch size for loading and training the data
-
+- The batch size for loading and training the data    
 It is a categorical parameter which values are chosen amongst three : 32, 64 or 128
 
-- The learning_rate for the optimizer ("adam" in this tuning)
-
+- The learning_rate for the optimizer ("adam" in this tuning)    
 It is a continuous parameter whose values are between 0.001 and 0.01
 
 These hyperparameter ranges were passed in an HyperparameterTuner instance.
@@ -54,11 +52,13 @@ These hyperparameter ranges were passed in an HyperparameterTuner instance.
 
 ### Method overview
 
-- I created a hook in the train_model.py file :
-    hook = smd.Hook.create_from_json_file()
+- I created a hook in the train_model.py file :   
+    hook = smd.Hook.create_from_json_file()   
     hook.register_hook(model)
 - I passed it as argument in the train and test functions
-- In the train function, I set the "TRAIN" mode during training -hook.set_mode(smd.modes.TRAIN)-, and "EVAL" during validation -hook.set_mode(smd.modes.EVAL)-
+- In the train function:   
+ I set the "TRAIN" mode during training -hook.set_mode(smd.modes.TRAIN) 
+ and "EVAL" during validation -hook.set_mode(smd.modes.EVAL)-
 - In the test function, it was naturally set to EVAL mode.
 
 The configs for profiler and debugger are prepared in the following dictionaries : profiler_config and debugger_config, and then passed to profiler_config and 
