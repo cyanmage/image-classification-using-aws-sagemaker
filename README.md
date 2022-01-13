@@ -28,21 +28,21 @@ These hyperparameter ranges were passed in an HyperparameterTuner instance.
 
 #### 1) Screenshot of completed hyperparameter tuning jobs:
 
-![img/HYPERPARAMETER-TUNING/During_training_jobs_4_all_completed.jpg](img/HYPERPARAMETER-TUNING/During_training_jobs_4_all_completed.jpg)
+[!img/HYPERPARAMETER-TUNING/During_training_jobs_4_all_completed.jpg](img/HYPERPARAMETER-TUNING/During_training_jobs_4_all_completed.jpg)
 
 #### 2) Screenshot of best hyperparameters training job :
 
-![img/HYPERPARAMETER-TUNING/best_training_job_hyperparameters.jpg](img/HYPERPARAMETER-TUNING/best_training_job_hyperparameters.jpg)
+[!img/HYPERPARAMETER-TUNING/best_training_job_hyperparameters.jpg](img/HYPERPARAMETER-TUNING/best_training_job_hyperparameters.jpg)
 
 #### 3) Metrics of hyperparameter tuning jobs (What is logged internally in the program and that the hook exploits):
-![img/HYPERPARAMETER-TUNING/Metrics_of_ hyperparameter_ tuning_jobs.jpg](img/HYPERPARAMETER-TUNING/Metrics_of_ hyperparameter_ tuning_jobs.jpg)
+[!img/HYPERPARAMETER-TUNING/Metrics_of_ hyperparameter_ tuning_jobs.jpg](img/HYPERPARAMETER-TUNING/Metrics_of_ hyperparameter_ tuning_jobs.jpg)
 
 #### 4) Cloudwatch metrics during the training process (what AWS sees externally):
-![img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_cpu utilization.jpg](img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_cpu utilization.jpg)
+[!img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_cpu utilization.jpg](img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_cpu utilization.jpg)
 
-![img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_disk utilization.jpg](img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_disk utilization.jpg)
+[!img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_disk utilization.jpg](img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_disk utilization.jpg)
 
-![img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_memory utilization.jpg](img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_memory utilization.jpg)
+[!img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_memory utilization.jpg](img/HYPERPARAMETER-TUNING/metric_of_one_of_the_hyperparameter_job_memory utilization.jpg)
 
 
 
@@ -66,7 +66,7 @@ loss_not_decreasing(), vanishing_gradient(), exploding_tensor(), overfit(), clas
 LowGPUUtilization(), OverallSystemUsage(), CPUBottleneck()
 
 #### Artifact folders created after debugging and profiling jobs
-![img/DEBUGGING-TRAINING/Artifacts_created_after_training_with _debugger_and _profiling.jpg](img/DEBUGGING-TRAINING/Artifacts_created_after_training_with _debugger_and _profiling.jpg)
+[!img/DEBUGGING-TRAINING/Artifacts_created_after_training_with _debugger_and _profiling.jpg](img/DEBUGGING-TRAINING/Artifacts_created_after_training_with _debugger_and _profiling.jpg)
 
 
 
@@ -74,7 +74,7 @@ LowGPUUtilization(), OverallSystemUsage(), CPUBottleneck()
 
 Here is the repartition of the different rules tested.
 
-![img/DEBUGGING-TRAINING/Rules_and_results.png](img/DEBUGGING-TRAINING/Rules_and_results.png)
+[!img/DEBUGGING-TRAINING/Rules_and_results.png](img/DEBUGGING-TRAINING/Rules_and_results.png)
 
 "GPU" has not been used, so LowGPUUtilization is not relevant. 
 What would be interesting to investigate are the "explodingTensor" and "Overfit" errors. It seems that coefficients of tensors are getting bigger and bigger. 
