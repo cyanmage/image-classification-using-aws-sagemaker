@@ -17,14 +17,15 @@ Upload the data to an S3 bucket through the AWS Gateway so that SageMaker has ac
 ## Hyperparameter Tuning
 What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
 
-The model is adapted from a resnet50 pretrained model. It is based on convolutional layers adapted for ML vision. So I took profit of transfer learning and already pretuned parameters. Dense layers were added on top to perform classification (my needs).
+_The model is adapted from a resnet50 pretrained model. It is based on convolutional layers adapted for ML vision. So I took profit of transfer learning and already pretuned parameters. Dense layers were added on top to perform classification (my needs)._
 
-For hyperparameters, I tuned the two following ones : 
-- the batch size for loading and training the data
-It is a categorical parameter which values are chosen amongst three : 32, 64 or 128
-- the learning_rate for the optimizer ("adam" in this tuning)
-It is a continuous parameter whose values are between 0.001 and 0.01
-These hyperparameter ranges were passed in an HyperparameterTuner instance.
+_For hyperparameters, I tuned the two following ones : 
+_- the batch size for loading and training the data
+_It is a categorical parameter which values are chosen amongst three : 32, 64 or 128
+_- the learning_rate for the optimizer ("adam" in this tuning)
+_It is a continuous parameter whose values are between 0.001 and 0.01
+_These hyperparameter ranges were passed in an HyperparameterTuner instance.
+
 
 #### 1) Screenshot of completed hyperparameter tuning jobs:
 
