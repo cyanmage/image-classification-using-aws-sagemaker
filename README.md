@@ -16,13 +16,17 @@ Upload the data to an S3 bucket through the AWS Gateway so that SageMaker has ac
 
 ## Hyperparameter Tuning
 
-The model is adapted from a resnet50 pretrained model. It is based on convolutional layers adapted for ML vision. So I took profit of transfer learning and already pretuned parameters. Dense layers were added on top to perform classification (my needs)._
+The model is adapted from a resnet50 pretrained model. It is based on convolutional layers adapted for ML vision. So I took profit of transfer learning and already pretuned parameters. Dense layers were added on top to perform classification (my needs).
 
 For hyperparameters, I tuned the two following ones : 
 - The batch size for loading and training the data
+
 It is a categorical parameter which values are chosen amongst three : 32, 64 or 128
+
 - The learning_rate for the optimizer ("adam" in this tuning)
+
 It is a continuous parameter whose values are between 0.001 and 0.01
+
 These hyperparameter ranges were passed in an HyperparameterTuner instance.
 
 
