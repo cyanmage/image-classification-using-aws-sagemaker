@@ -35,14 +35,14 @@ These hyperparameter ranges were passed in an HyperparameterTuner instance.
 ![](img/HYPERPARAMETER_TUNING/best_training_job_hyperparameters.jpg)
 
 #### 3) Metrics of hyperparameter tuning jobs (What is logged internally in the program and that the hook exploits):
-![](img/HYPERPARAMETER_TUNING/Metrics_of_ hyperparameter_ tuning_jobs.jpg)
+![](img/HYPERPARAMETER_TUNING/Metrics_of_ hyperparameter_tuning_jobs.jpg)
 
 #### 4) Cloudwatch metrics during the training process (what AWS sees externally):
-![](img/HYPERPARAMETER_TUNING/metric_of_one_of_the_hyperparameter_job_cpu utilization.jpg)
+![](img/HYPERPARAMETER_TUNING/metric_of_one_of_the_hyperparameter_job_cpu_utilization.jpg)
 
-![](img/HYPERPARAMETER_TUNING/metric_of_one_of_the_hyperparameter_job_disk utilization.jpg)
+![](img/HYPERPARAMETER_TUNING/metric_of_one_of_the_hyperparameter_job_disk_utilization.jpg)
 
-![](img/HYPERPARAMETER_TUNING/metric_of_one_of_the_hyperparameter_job_memory utilization.jpg)
+![](img/HYPERPARAMETER_TUNING/metric_of_one_of_the_hyperparameter_job_memory_utilization.jpg)
 
 
 
