@@ -98,13 +98,14 @@ Moreover, with overfitting, the model adapt to training data, but not so well fo
 
 
 ## Model Deployment
-Here is the python instruction I used:
-pytorch_model = PyTorchModel(model_data=model_location, role=role, entry_point='inference.py',py_version='py3',
-                             framework_version='1.4')
+Here is the python instruction I used: 
+pytorch_model = PyTorchModel(model_data=model_location, 
+role=role, entry_point='inference.py',py_version='py3', 
+framework_version='1.4')
 
 The model was recovered from the location where it was saved in S3 (with argument model_data in the PyTorch constructor class). 
 
-Remark : I had to get an entry point with a python file I recovered from the Course 5 ("inference.py" in the "Operationalizing Machine Learning in Sagemaker"), as I could not use the "train_model.py" one(It is a separated instance for inference estimating and smdebug was not installed on this instance, so I got an error as "train_model.py" uses smdebug).
+_Remark : I had to get an entry point with a python file I recovered from the Course 5 ("inference.py" in the "Operationalizing Machine Learning in Sagemaker"), as I could not use the "train_model.py" one(It is a separated instance for inference estimating and smdebug was not installed on this instance, so I got an error as "train_model.py" uses smdebug)._
 
 Then it was deployed and I got the endpoint_name (attribute), and created an instance of a Predictor class with this name.
 
