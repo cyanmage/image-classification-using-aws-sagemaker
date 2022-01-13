@@ -64,7 +64,7 @@ These hyperparameter ranges were passed in an HyperparameterTuner instance.
 The configs for profiler and debugger are prepared in the following dictionaries : profiler_config and debugger_config, and then passed to profiler_config and 
 debugger_hook_config arguments of an estimator, as well as chosen rules.
 Here are the ones I tested:
-- Debugger rules:
+- Debugger rules:     
 loss_not_decreasing(), vanishing_gradient(), exploding_tensor(), overfit(), class_imbalance() (can be used with this pytorch DL framework), overtraining(), poor_weight_initialization()
 - Profiler rules:    
 LowGPUUtilization(), OverallSystemUsage(), CPUBottleneck()
