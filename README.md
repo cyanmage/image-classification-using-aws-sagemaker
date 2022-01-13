@@ -98,7 +98,7 @@ Moreover, with overfitting, the model adapt to training data, but not so well fo
 
 
 ## Model Deployment
-Here is the python instruction I used: 
+Here is the python instruction I used:      
 pytorch_model = PyTorchModel(model_data=model_location, 
 role=role, entry_point='inference.py',py_version='py3', 
 framework_version='1.4')
